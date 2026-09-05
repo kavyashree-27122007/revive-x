@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Sidebar } from './components/layout/Sidebar';
 import { TopBar } from './components/layout/TopBar';
 import { DemoGuideModal } from './components/demo/DemoGuideModal';
@@ -11,7 +11,18 @@ import { Transactions } from './pages/Transactions';
 import { Policies } from './pages/Policies';
 import { AuditTrail } from './pages/AuditTrail';
 import { Settings } from './pages/Settings';
+import { Login } from './pages/Login';
 import { api } from './lib/api';
+
+const isAuthenticated = () => sessionStorage.getItem('revivex_auth') === 'true';
+
+const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  return <>{children}</>;
+};
 
 export const App: React.FC = () => {
   const [showDemoGuide, setShowDemoGuide] = useState(false);
@@ -40,42 +51,50 @@ export const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <div className="flex min-h-screen bg-[#F8FAFC] text-slate-900 font-sans">
-        {/* Navigation Sidebar */}
-        <Sidebar />
+      <Routes>
+        {/* Public */}
+        <Route path="/login" element={<Login />} />
 
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col min-w-0">
-          <TopBar
-            onLoadDemoData={handleLoadDemoData}
-            onOpenDemoGuide={() => setShowDemoGuide(true)}
-            isLoading={isLoadingData}
-          />
-
-          <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto overflow-y-auto">
-            <Routes>
-              <Route path="/" element={<CommandCenter />} />
-              <Route path="/radar" element={<RevenueRadar />} />
-              <Route path="/decisions" element={<AIDecisions />} />
-              <Route path="/simulator" element={<RecoverySimulator />} />
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/policies" element={<Policies />} />
-              <Route path="/audit" element={<AuditTrail />} />
-              <Route path="/settings" element={<Settings />} />
-            </Routes>
-          </main>
-        </div>
-
-        {/* 5-Min Demo Guide Modal */}
-        {showDemoGuide && (
-          <DemoGuideModal
-            onClose={() => setShowDemoGuide(false)}
-            onLoadData={handleLoadDemoData}
-            onRunBatch={handleRunBatch}
-          />
-        )}
-      </div>
+        {/* Protected app shell */}
+        <Route
+          path="/*"
+          element={
+            <ProtectedLayout>
+              <div className="flex min-h-screen bg-[#F8FAFC] text-slate-900 font-sans">
+                <Sidebar />
+                <div className="flex-1 flex flex-col min-w-0">
+                  <TopBar
+                    onLoadDemoData={handleLoadDemoData}
+                    onOpenDemoGuide={() => setShowDemoGuide(true)}
+                    isLoading={isLoadingData}
+                  />
+                  <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto overflow-y-auto">
+                    <Routes>
+                      <Route path="/" element={<CommandCenter />} />
+                      <Route path="/radar" element={<RevenueRadar />} />
+                      <Route path="/decisions" element={<AIDecisions />} />
+                      <Route path="/simulator" element={<RecoverySimulator />} />
+                      <Route path="/transactions" element={<Transactions />} />
+                      <Route path="/policies" element={<Policies />} />
+                      <Route path="/audit" element={<AuditTrail />} />
+                      <Route path="/settings" element={<Settings />} />
+                    </Routes>
+                  </main>
+                </div>
+                {showDemoGuide && (
+                  <DemoGuideModal
+                    onClose={() => setShowDemoGuide(false)}
+                    onLoadData={handleLoadDemoData}
+                    onRunBatch={handleRunBatch}
+                  />
+                )}
+              </div>
+            </ProtectedLayout>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 };
 export default App;
+

@@ -20,6 +20,8 @@ import { generateSyntheticDataset } from './engines/datasetGenerator.js';
 import { inMemoryTransactions } from './engines/recoveryOrchestrator.js';
 import { TransactionModel } from './models/Transaction.js';
 import { isMongoConnected } from './config/db.js';
+import path from 'path';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -67,6 +69,21 @@ app.use('/api/policies', policiesRouter);
 app.use('/api/audit', auditRouter);
 app.use('/api/demo', demoRouter);
 app.use('/api/webhooks', webhooksRouter);
+
+
+// Serve frontend static assets & SPA fallback (Single-service deployment on Render)
+const clientDistPath = path.resolve(__dirname, '../../client/dist');
+
+
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
 // Global Error Handler
 app.use(errorHandler);
