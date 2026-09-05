@@ -1,5 +1,4 @@
 # REVIVE X — AI Revenue Recovery Intelligence & Orchestration
-> **Razorpay AI Buildathon — Track 03: "Find revenue that's slipping away and win it back."**
 
 [![Node.js](https://img.shields.io/badge/Node.js-v20.x-green.svg)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-v18.x-61dafb.svg)](https://reactjs.org/)
