@@ -19,21 +19,21 @@ export const ModeIndicator: React.FC = () => {
     <div className="flex items-center gap-2">
       {/* Razorpay Mode Badge */}
       <div
-        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold border ${
+        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors ${
           isMock
-            ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
-            : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+            ? 'bg-amber-50 text-amber-800 border-amber-200 shadow-sm'
+            : 'bg-emerald-50 text-emerald-800 border-emerald-200 shadow-sm'
         }`}
         title={isMock ? 'Running without live Razorpay keys - deterministic simulated execution' : 'Razorpay Test Mode active'}
       >
-        {isMock ? <AlertTriangle className="w-3.5 h-3.5" /> : <ShieldCheck className="w-3.5 h-3.5" />}
+        {isMock ? <AlertTriangle className="w-3.5 h-3.5 text-amber-600" /> : <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />}
         <span>{isMock ? 'MOCK PAYMENT MODE' : 'RAZORPAY TEST MODE'}</span>
       </div>
 
-      {/* AI Provider Badge */}
-      <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/30">
-        <Cpu className="w-3.5 h-3.5" />
-        <span className="uppercase">{aiProvider === 'gemini' ? 'GEMINI 1.5 PRO' : 'DETERMINISTIC AI'}</span>
+      {/* AI Provider Badge - subtle violet for AI */}
+      <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold bg-violet-50 text-violet-700 border border-violet-200 shadow-sm">
+        <Cpu className="w-3.5 h-3.5 text-violet-600" />
+        <span className="uppercase">{aiProvider === 'gemini' ? 'GEMINI 1.5 PRO AI' : 'DETERMINISTIC AI'}</span>
       </div>
     </div>
   );

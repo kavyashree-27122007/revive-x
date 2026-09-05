@@ -8,10 +8,19 @@ export default {
     extend: {
       colors: {
         fintech: {
-          dark: '#0B0F19',
-          card: '#121826',
-          border: '#1E293B',
-          accent: '#3B82F6',
+          bg: '#F8FAFC',
+          surface: '#FFFFFF',
+          sidebar: '#090D16',
+          navy: '#0F172A',
+          navyMuted: '#1E293B',
+          card: '#FFFFFF',
+          border: '#E2E8F0',
+          accent: '#06B6D4',
+          cyan: '#06B6D4',
+          cyanDark: '#0891B2',
+          cyanLight: '#ECFEFF',
+          violet: '#7C3AED',
+          violetLight: '#F5F3FF',
           emerald: '#10B981',
           rose: '#F43F5E',
           amber: '#F59E0B',

@@ -48,48 +48,70 @@ export const AIDecisions: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {/* Header with AI Violet Accent */}
       <div>
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <BrainCircuit className="w-5 h-5 text-blue-400" />
-          <span>Explainable AI Decisions</span>
-        </h2>
-        <p className="text-xs text-slate-400">
-          Every financial recommendation is derived from deterministic probability models, cost-benefit optimization, and strict Guardian policy checks.
-        </p>
+        <div className="flex items-center gap-2">
+          <div className="p-2 rounded-lg bg-violet-50 border border-violet-200">
+            <BrainCircuit className="w-5 h-5 text-violet-600" />
+          </div>
+          <div>
+            <h2 className="text-xl font-black tracking-tight text-slate-900">
+              Explainable AI Decision Audit
+            </h2>
+            <p className="text-xs text-slate-500">
+              Deterministic probability modeling, mathematical cost-benefit optimization, and strict Guardian policy safety.
+            </p>
+          </div>
+        </div>
       </div>
 
-      {/* Flagship Hackathon Presentation Scenarios */}
+      {/* Flagship Verification Scenarios */}
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <Sparkles className="w-4 h-4 text-amber-400" />
-          <h3 className="text-sm font-bold text-slate-200">
-            Critical Hackathon Verification Scenarios
+          <Sparkles className="w-4 h-4 text-cyan-600" />
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600">
+            Critical Verification Scenarios
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Scenario 1: Blocked Policy Violation */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Scenario 1: Blocked Policy Violation (Visually impressive high-contrast blocked card) */}
           <div
             onClick={() => {
               const tx = demoCases.find((d) => d.transactionId === 'TXN-DEMO-9999');
               if (tx) setSelectedTx(tx);
             }}
-            className="p-5 rounded-xl bg-gradient-to-br from-rose-950/30 to-slate-900 border border-rose-500/30 cursor-pointer hover:border-rose-500/60 transition-all group"
+            className="p-6 rounded-2xl bg-white border-2 border-rose-300/80 shadow-md hover:shadow-xl hover:border-rose-400 transition-all cursor-pointer group flex flex-col justify-between relative overflow-hidden"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono font-bold text-rose-400">TXN-DEMO-9999</span>
-              <StatusBadge status="blocked" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-bl-full pointer-events-none -z-0" />
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono font-black text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                  TXN-DEMO-9999
+                </span>
+                <StatusBadge status="blocked" />
+              </div>
+
+              <h4 className="text-base font-black text-slate-900 group-hover:text-rose-700 transition-colors">
+                Guardian Policy Block: 25% Discount Violation
+              </h4>
+
+              <div className="my-3 p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-900">
+                <div className="flex items-center gap-1.5 font-bold mb-1 text-rose-800">
+                  <AlertOctagon className="w-4 h-4 text-rose-600" />
+                  <span>GUARDIAN SAFETY TRIPPED</span>
+                </div>
+                AI suggested a 25% discount. Guardian detected a hard violation of merchant's <strong>10% max incentive cap</strong>, blocked the action, and safely converted to <strong>Delayed Retry</strong>.
+              </div>
+
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Transaction Value: <strong className="text-slate-900">₹32,000</strong>. Zero unauthorized merchant margin burned.
+              </p>
             </div>
-            <h4 className="text-sm font-bold text-white group-hover:text-rose-300 transition-colors">
-              Guardian Policy Block: 25% Discount Violation
-            </h4>
-            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-              Amount: <strong className="text-white">₹32,000</strong>. AI proposed a 25% incentive. Guardian detected violation of <strong>10% maximum discount</strong> limit, blocked the action, and autonomously selected <strong>Delayed Retry</strong>.
-            </p>
-            <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs">
-              <span className="text-rose-400 font-semibold">Click to Inspect & Audit</span>
-              <ArrowRight className="w-4 h-4 text-rose-400 group-hover:translate-x-1 transition-transform" />
+
+            <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs relative z-10">
+              <span className="text-rose-700 font-bold">Inspect Decision Reasoning</span>
+              <ArrowRight className="w-4 h-4 text-rose-600 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
@@ -99,21 +121,36 @@ export const AIDecisions: React.FC = () => {
               const tx = demoCases.find((d) => d.transactionId === 'TXN-DEMO-9998');
               if (tx) setSelectedTx(tx);
             }}
-            className="p-5 rounded-xl bg-gradient-to-br from-amber-950/30 to-slate-900 border border-amber-500/30 cursor-pointer hover:border-amber-500/60 transition-all group"
+            className="p-6 rounded-2xl bg-white border border-amber-300 shadow-sm hover:shadow-xl hover:border-amber-400 transition-all cursor-pointer group flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono font-bold text-amber-400">TXN-DEMO-9998</span>
-              <StatusBadge status="escalated" />
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono font-black text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                  TXN-DEMO-9998
+                </span>
+                <StatusBadge status="escalated" />
+              </div>
+
+              <h4 className="text-base font-black text-slate-900 group-hover:text-amber-700 transition-colors">
+                High-Value Escalation Threshold Exceeded
+              </h4>
+
+              <div className="my-3 p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-900">
+                <div className="flex items-center gap-1.5 font-bold mb-1 text-amber-800">
+                  <ShieldAlert className="w-4 h-4 text-amber-600" />
+                  <span>HUMAN SIGN-OFF REQUIRED</span>
+                </div>
+                Amount: <strong className="text-slate-900">₹45,000</strong>. Exceeds the autonomous limit of <strong>₹10,000</strong>. Guardian prevents automated recovery and routes to human merchant sign-off.
+              </div>
+
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Prevents accidental automated refunds or unmonitored VIP customer outreach.
+              </p>
             </div>
-            <h4 className="text-sm font-bold text-white group-hover:text-amber-300 transition-colors">
-              High-Value Escalation Threshold Exceeded
-            </h4>
-            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-              Amount: <strong className="text-white">₹45,000</strong>. Exceeds the autonomous execution limit of <strong>₹10,000</strong>. Guardian prevents automated recovery and routes to human operator review.
-            </p>
-            <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs">
-              <span className="text-amber-400 font-semibold">Click to Inspect & Audit</span>
-              <ArrowRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform" />
+
+            <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+              <span className="text-amber-700 font-bold">Inspect Escalation Path</span>
+              <ArrowRight className="w-4 h-4 text-amber-600 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
@@ -123,21 +160,36 @@ export const AIDecisions: React.FC = () => {
               const tx = demoCases.find((d) => d.transactionId === 'TXN-DEMO-9997');
               if (tx) setSelectedTx(tx);
             }}
-            className="p-5 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-700 cursor-pointer hover:border-slate-500 transition-all group"
+            className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-slate-300 transition-all cursor-pointer group flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono font-bold text-slate-400">TXN-DEMO-9997</span>
-              <StatusBadge status="stopped" />
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono font-black text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                  TXN-DEMO-9997
+                </span>
+                <StatusBadge status="stopped" />
+              </div>
+
+              <h4 className="text-base font-black text-slate-900 group-hover:text-slate-700 transition-colors">
+                Autonomous STOP: Uneconomical & Customer Protection
+              </h4>
+
+              <div className="my-3 p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700">
+                <div className="flex items-center gap-1.5 font-bold mb-1 text-slate-800">
+                  <Lock className="w-4 h-4 text-slate-600" />
+                  <span>RECOVERY CEASED</span>
+                </div>
+                Age: <strong>75 hours</strong> (exceeds 48h limit). 4 retries already failed; probability is <strong>8%</strong>. AI terminates recovery to protect customer relationship and bank score.
+              </div>
+
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Prevents merchant from appearing spammy or incurring wasted payment attempt fees.
+              </p>
             </div>
-            <h4 className="text-sm font-bold text-white group-hover:text-slate-300 transition-colors">
-              Autonomous STOP: Exhausted & Uneconomical
-            </h4>
-            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-              Age: <strong>75 hours</strong> (exceeds 48h window), 4 retries failed, recovery probability is <strong>8%</strong>. AI terminates recovery to protect customer relationship and avoid wasteful retries.
-            </p>
-            <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs">
-              <span className="text-slate-400 font-semibold">Click to Inspect & Audit</span>
-              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
+
+            <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+              <span className="text-slate-700 font-bold">Inspect Termination Logic</span>
+              <ArrowRight className="w-4 h-4 text-slate-600 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
@@ -147,21 +199,36 @@ export const AIDecisions: React.FC = () => {
               const tx = demoCases.find((d) => d.transactionId === 'TXN-DEMO-9996');
               if (tx) setSelectedTx(tx);
             }}
-            className="p-5 rounded-xl bg-gradient-to-br from-emerald-950/30 to-slate-900 border border-emerald-500/30 cursor-pointer hover:border-emerald-500/60 transition-all group"
+            className="p-6 rounded-2xl bg-white border border-emerald-300 shadow-sm hover:shadow-xl hover:border-emerald-400 transition-all cursor-pointer group flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono font-bold text-emerald-400">TXN-DEMO-9996</span>
-              <StatusBadge status="approved" />
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-mono font-black text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  TXN-DEMO-9996
+                </span>
+                <StatusBadge status="approved" />
+              </div>
+
+              <h4 className="text-base font-black text-slate-900 group-hover:text-emerald-700 transition-colors">
+                Optimal Strategy: Abandoned Checkout Recovery
+              </h4>
+
+              <div className="my-3 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-900">
+                <div className="flex items-center gap-1.5 font-bold mb-1 text-emerald-800">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>OPTIMAL RECOVERY APPROVED</span>
+                </div>
+                Amount: <strong className="text-slate-900">₹8,500</strong>. High buyer intent (11 pages viewed). Recovery Probability: <strong>84%</strong>. AI generated Payment Link with net expected return of <strong>₹7,130</strong>.
+              </div>
+
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Fully automated, policy-compliant recovery ready for instant execution.
+              </p>
             </div>
-            <h4 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
-              Optimal Strategy: Checkout Abandonment Recovery
-            </h4>
-            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-              Amount: <strong className="text-white">₹8,500</strong>. High buyer intent (11 pages viewed). Recovery Probability: <strong>84%</strong>. AI selected <strong>Payment Link</strong> with expected net recovery of <strong>₹7,130</strong>.
-            </p>
-            <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs">
-              <span className="text-emerald-400 font-semibold">Click to Execute Recovery</span>
-              <ArrowRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+
+            <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+              <span className="text-emerald-700 font-bold">Execute Recovery Action</span>
+              <ArrowRight className="w-4 h-4 text-emerald-600 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
         </div>

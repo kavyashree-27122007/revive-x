@@ -44,25 +44,28 @@ export const RevenueRadar: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-white">Revenue Radar</h2>
-          <p className="text-xs text-slate-400">
-            Continuously tracking and scoring revenue-at-risk events across payments, checkouts, and invoices.
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+            <h2 className="text-xl font-black tracking-tight text-slate-900">Revenue Radar</h2>
+          </div>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Continuously tracking and scoring revenue-at-risk events across payments, checkouts, and recurring subscriptions.
           </p>
         </div>
         <button
           onClick={loadRiskEvents}
           disabled={isLoading}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 w-fit"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-xs w-fit transition-colors cursor-pointer"
         >
-          <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
-          <span>Refresh Events</span>
+          <RefreshCw className={`w-3.5 h-3.5 text-cyan-600 ${isLoading ? 'animate-spin' : ''}`} />
+          <span>Refresh Radar</span>
         </button>
       </div>
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-xl bg-[#121826]/80 border border-slate-800 flex flex-wrap items-center gap-3">
-        <div className="flex items-center gap-1.5 text-xs text-slate-400 mr-2">
-          <Filter className="w-4 h-4" />
+      <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500 mr-2 uppercase tracking-wider">
+          <Filter className="w-3.5 h-3.5 text-cyan-600" />
           <span>Filters:</span>
         </div>
 
@@ -73,7 +76,7 @@ export const RevenueRadar: React.FC = () => {
             setLeakageType(e.target.value);
             setPage(1);
           }}
-          className="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-blue-500"
+          className="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-500 font-medium"
         >
           <option value="">All Leakage Types</option>
           <option value="payment_failure">Payment Failure</option>
@@ -91,7 +94,7 @@ export const RevenueRadar: React.FC = () => {
             setRiskLevel(e.target.value);
             setPage(1);
           }}
-          className="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-blue-500"
+          className="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-500 font-medium"
         >
           <option value="">All Risk Levels</option>
           <option value="high">High Risk</option>
@@ -106,7 +109,7 @@ export const RevenueRadar: React.FC = () => {
             setRecoveryStatus(e.target.value);
             setPage(1);
           }}
-          className="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-blue-500"
+          className="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-500 font-medium"
         >
           <option value="">All Statuses</option>
           <option value="pending">Pending</option>
@@ -117,74 +120,74 @@ export const RevenueRadar: React.FC = () => {
           <option value="stopped">Stopped</option>
         </select>
 
-        <span className="ml-auto text-xs text-slate-500">
-          Showing {items.length} of {total} risk events
+        <span className="ml-auto text-xs font-semibold text-slate-500">
+          Showing <strong className="text-slate-900">{items.length}</strong> of <strong className="text-slate-900">{total}</strong> risk events
         </span>
       </div>
 
       {/* Events Table */}
-      <div className="p-5 rounded-xl bg-[#121826]/80 border border-slate-800 overflow-hidden">
+      <div className="p-6 rounded-xl bg-white border border-slate-200/90 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 uppercase tracking-wider">
-                <th className="pb-3 font-semibold">Transaction ID</th>
-                <th className="pb-3 font-semibold">Customer</th>
-                <th className="pb-3 font-semibold">Amount</th>
-                <th className="pb-3 font-semibold">Leakage Type</th>
-                <th className="pb-3 font-semibold">Risk Score</th>
-                <th className="pb-3 font-semibold">Recovery Prob.</th>
-                <th className="pb-3 font-semibold">Expected Net</th>
-                <th className="pb-3 font-semibold">Recommended Action</th>
-                <th className="pb-3 font-semibold">Status</th>
-                <th className="pb-3 font-semibold text-right">Audit</th>
+              <tr className="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-bold bg-slate-50/60">
+                <th className="py-2.5 px-3">Transaction ID</th>
+                <th className="py-2.5 px-3">Customer</th>
+                <th className="py-2.5 px-3">Amount</th>
+                <th className="py-2.5 px-3">Leakage Type</th>
+                <th className="py-2.5 px-3">Risk Assessment</th>
+                <th className="py-2.5 px-3">Recovery Prob.</th>
+                <th className="py-2.5 px-3">Expected Net</th>
+                <th className="py-2.5 px-3">Recommended Action</th>
+                <th className="py-2.5 px-3">Status</th>
+                <th className="py-2.5 px-3 text-right">Audit</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-slate-100">
               {items.map((tx) => (
                 <tr
                   key={tx.transactionId}
                   onClick={() => setSelectedTx(tx)}
-                  className="hover:bg-slate-800/40 transition-colors cursor-pointer"
+                  className="hover:bg-slate-50/80 transition-colors cursor-pointer"
                 >
-                  <td className="py-3 font-mono font-bold text-blue-400">{tx.transactionId}</td>
-                  <td className="py-3 text-slate-200 font-medium">{tx.customerName}</td>
-                  <td className="py-3 font-bold text-white">{formatINR(tx.amount)}</td>
-                  <td className="py-3 capitalize text-slate-300">
+                  <td className="py-3 px-3 font-mono font-bold text-cyan-700">{tx.transactionId}</td>
+                  <td className="py-3 px-3 text-slate-800 font-semibold">{tx.customerName}</td>
+                  <td className="py-3 px-3 font-bold text-slate-900">{formatINR(tx.amount)}</td>
+                  <td className="py-3 px-3 capitalize text-slate-600">
                     {tx.leakageType ? tx.leakageType.replace(/_/g, ' ') : '—'}
                   </td>
-                  <td className="py-3">
+                  <td className="py-3 px-3">
                     <span
-                      className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold ${
+                      className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border ${
                         tx.riskScore > 70
-                          ? 'bg-rose-500/20 text-rose-400'
+                          ? 'bg-rose-50 text-rose-700 border-rose-200'
                           : tx.riskScore > 40
-                          ? 'bg-amber-500/20 text-amber-400'
-                          : 'bg-emerald-500/20 text-emerald-400'
+                          ? 'bg-amber-50 text-amber-800 border-amber-200'
+                          : 'bg-emerald-50 text-emerald-700 border-emerald-200'
                       }`}
                     >
-                      {tx.riskScore || 30}/100
+                      {tx.riskScore > 70 ? 'HIGH RISK' : tx.riskScore > 40 ? 'MEDIUM' : 'LOW RISK'} ({tx.riskScore || 30})
                     </span>
                   </td>
-                  <td className="py-3 font-bold text-blue-400">
+                  <td className="py-3 px-3 font-bold text-cyan-600">
                     {formatPercent(tx.recoveryProbability * 100)}
                   </td>
-                  <td className="py-3 font-bold text-emerald-400">
+                  <td className="py-3 px-3 font-black text-emerald-600">
                     {formatINR(tx.expectedNetRecovery || tx.amount * 0.65)}
                   </td>
-                  <td className="py-3 uppercase font-mono text-[10px] text-slate-300">
+                  <td className="py-3 px-3 uppercase font-mono text-[10px] text-slate-600">
                     {tx.recommendedIntervention || 'delayed_retry'}
                   </td>
-                  <td className="py-3">
+                  <td className="py-3 px-3">
                     <StatusBadge status={tx.recoveryStatus || 'pending'} />
                   </td>
-                  <td className="py-3 text-right">
+                  <td className="py-3 px-3 text-right">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedTx(tx);
                       }}
-                      className="px-2.5 py-1 rounded text-[11px] font-bold bg-blue-600/20 text-blue-400 hover:bg-blue-600/40 border border-blue-500/30"
+                      className="px-3 py-1 rounded text-[11px] font-bold bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border border-cyan-200 transition-colors"
                     >
                       Audit
                     </button>
@@ -196,20 +199,20 @@ export const RevenueRadar: React.FC = () => {
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-800 text-xs text-slate-400">
-          <span>Page {page} of {Math.max(1, Math.ceil(total / 25))}</span>
+        <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100 text-xs text-slate-500 font-medium">
+          <span>Page <strong className="text-slate-900">{page}</strong> of <strong className="text-slate-900">{Math.max(1, Math.ceil(total / 25))}</strong></span>
           <div className="flex gap-2">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-40"
+              className="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 disabled:opacity-40 font-semibold transition-colors"
             >
               Previous
             </button>
             <button
               onClick={() => setPage((p) => p + 1)}
               disabled={page >= Math.ceil(total / 25)}
-              className="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-40"
+              className="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 disabled:opacity-40 font-semibold transition-colors"
             >
               Next
             </button>

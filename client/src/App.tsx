@@ -40,7 +40,7 @@ export const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <div className="flex min-h-screen bg-[#0B0F19] text-slate-100 font-sans">
+      <div className="flex min-h-screen bg-[#F8FAFC] text-slate-900 font-sans">
         {/* Navigation Sidebar */}
         <Sidebar />
 

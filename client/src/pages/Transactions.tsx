@@ -37,23 +37,23 @@ export const Transactions: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-white">All Transactions</h2>
-          <p className="text-xs text-slate-400">
-            Complete transaction ledger ingested from checkout and payment gateways.
+          <h2 className="text-xl font-black tracking-tight text-slate-900">All Ingested Transactions</h2>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Complete transaction ledger ingested from checkout funnels, API webhooks, and payment gateways.
           </p>
         </div>
         <button
           onClick={loadTransactions}
           disabled={isLoading}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 w-fit"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-xs w-fit transition-colors cursor-pointer"
         >
-          <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
-          <span>Refresh</span>
+          <RefreshCw className={`w-3.5 h-3.5 text-cyan-600 ${isLoading ? 'animate-spin' : ''}`} />
+          <span>Refresh Ledger</span>
         </button>
       </div>
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-xl bg-[#121826]/80 border border-slate-800 flex items-center justify-between gap-4">
+      <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Filter className="w-4 h-4 text-slate-400" />
           <select
@@ -62,7 +62,7 @@ export const Transactions: React.FC = () => {
               setPaymentStatus(e.target.value);
               setPage(1);
             }}
-            className="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-blue-500"
+            className="bg-slate-50 border border-slate-200 text-slate-700 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-500 font-medium"
           >
             <option value="">All Payment Statuses</option>
             <option value="success">Success</option>
@@ -74,52 +74,58 @@ export const Transactions: React.FC = () => {
           </select>
         </div>
 
-        <span className="text-xs text-slate-500">
-          Showing {transactions.length} of {total} records
+        <span className="text-xs font-semibold text-slate-500">
+          Showing <strong className="text-slate-900">{transactions.length}</strong> of <strong className="text-slate-900">{total}</strong> records
         </span>
       </div>
 
-      {/* Table */}
-      <div className="p-5 rounded-xl bg-[#121826]/80 border border-slate-800 overflow-hidden">
+      {/* Ledger Table */}
+      <div className="p-6 rounded-xl bg-white border border-slate-200/90 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 uppercase tracking-wider">
-                <th className="pb-3 font-semibold">Transaction ID</th>
-                <th className="pb-3 font-semibold">Customer</th>
-                <th className="pb-3 font-semibold">Amount</th>
-                <th className="pb-3 font-semibold">Product</th>
-                <th className="pb-3 font-semibold">Payment Status</th>
-                <th className="pb-3 font-semibold">Failure Cause</th>
-                <th className="pb-3 font-semibold">Timestamp</th>
-                <th className="pb-3 font-semibold text-right">Action</th>
+              <tr className="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-bold bg-slate-50/60">
+                <th className="py-2.5 px-3">Transaction ID</th>
+                <th className="py-2.5 px-3">Customer</th>
+                <th className="py-2.5 px-3">Amount</th>
+                <th className="py-2.5 px-3">Product</th>
+                <th className="py-2.5 px-3">Payment Status</th>
+                <th className="py-2.5 px-3">Failure Cause</th>
+                <th className="py-2.5 px-3">Timestamp</th>
+                <th className="py-2.5 px-3 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-slate-100">
               {transactions.map((tx) => (
                 <tr
                   key={tx.transactionId}
                   onClick={() => setSelectedTx(tx)}
-                  className="hover:bg-slate-800/40 transition-colors cursor-pointer"
+                  className="hover:bg-slate-50/80 transition-colors cursor-pointer"
                 >
-                  <td className="py-3 font-mono font-bold text-blue-400">{tx.transactionId}</td>
-                  <td className="py-3 text-slate-200">{tx.customerName}</td>
-                  <td className="py-3 font-bold text-white">{formatINR(tx.amount)}</td>
-                  <td className="py-3 text-slate-300 max-w-xs truncate">{tx.product}</td>
-                  <td className="py-3">
+                  <td className="py-3 px-3 font-mono font-bold text-cyan-700">{tx.transactionId}</td>
+                  <td className="py-3 px-3 text-slate-800 font-semibold">{tx.customerName}</td>
+                  <td className="py-3 px-3 font-bold text-slate-900">{formatINR(tx.amount)}</td>
+                  <td className="py-3 px-3 text-slate-600 max-w-xs truncate">{tx.product}</td>
+                  <td className="py-3 px-3">
                     <StatusBadge status={tx.paymentStatus} />
                   </td>
-                  <td className="py-3 font-mono text-[10px] text-rose-400">
-                    {tx.failureReason || '—'}
+                  <td className="py-3 px-3 font-mono text-[10px] text-rose-600">
+                    {tx.failureReason ? (
+                      <span className="bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200">
+                        {tx.failureReason}
+                      </span>
+                    ) : (
+                      '—'
+                    )}
                   </td>
-                  <td className="py-3 text-slate-400">{formatDate(tx.timestamp)}</td>
-                  <td className="py-3 text-right">
+                  <td className="py-3 px-3 text-slate-500">{formatDate(tx.timestamp)}</td>
+                  <td className="py-3 px-3 text-right">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedTx(tx);
                       }}
-                      className="px-2.5 py-1 rounded text-[11px] font-bold bg-slate-800 hover:bg-slate-700 text-slate-300"
+                      className="px-3 py-1 rounded text-[11px] font-bold bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border border-cyan-200 transition-colors"
                     >
                       Details
                     </button>
@@ -131,20 +137,20 @@ export const Transactions: React.FC = () => {
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-800 text-xs text-slate-400">
-          <span>Page {page} of {Math.max(1, Math.ceil(total / 25))}</span>
+        <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100 text-xs text-slate-500 font-medium">
+          <span>Page <strong className="text-slate-900">{page}</strong> of <strong className="text-slate-900">{Math.max(1, Math.ceil(total / 25))}</strong></span>
           <div className="flex gap-2">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-40"
+              className="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 disabled:opacity-40 font-semibold transition-colors"
             >
               Previous
             </button>
             <button
               onClick={() => setPage((p) => p + 1)}
               disabled={page >= Math.ceil(total / 25)}
-              className="px-3 py-1 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-40"
+              className="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 disabled:opacity-40 font-semibold transition-colors"
             >
               Next
             </button>
