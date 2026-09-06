@@ -31,9 +31,22 @@ import type {
   RiskLevel,
 } from '@revive-x/shared';
 
+import { generateSyntheticDataset } from './datasetGenerator.js';
+
 // In-Memory store fallback when MongoDB is not connected
 export const inMemoryTransactions: Map<string, any> = new Map();
 export const inMemoryActions: Map<string, any> = new Map();
+
+// Vercel Serverless Cold Start Fix: Synchronously pre-populate data
+try {
+  const initialData = generateSyntheticDataset(1000, 42);
+  for (const tx of initialData) {
+    inMemoryTransactions.set(tx.transactionId, tx);
+  }
+  console.info(`[Init] Vercel Serverless: Pre-populated 1000 mock transactions in memory.`);
+} catch (e) {
+  console.warn('[Init] Pre-population failed:', e);
+}
 
 /**
  * Run full AI & Guardian analysis on a single transaction
