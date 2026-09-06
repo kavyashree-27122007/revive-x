@@ -1,6 +1,6 @@
 import React from 'react';
 import { ModeIndicator } from './ModeIndicator';
-import { PlayCircle, Database } from 'lucide-react';
+import { PlayCircle, Database, LogOut } from 'lucide-react';
 
 interface TopBarProps {
   onLoadDemoData?: () => void;
@@ -48,6 +48,19 @@ export const TopBar: React.FC<TopBarProps> = ({
             <span>5-Min Demo Guide</span>
           </button>
         )}
+
+        {/* Logout Button */}
+        <button
+          onClick={() => {
+            localStorage.removeItem('revivex_auth');
+            window.location.reload();
+          }}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white hover:bg-rose-50 text-slate-500 hover:text-rose-600 border border-slate-200 transition-all ml-2"
+          title="Sign Out"
+        >
+          <LogOut className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Sign Out</span>
+        </button>
       </div>
     </header>
   );

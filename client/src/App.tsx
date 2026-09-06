@@ -14,7 +14,7 @@ import { Settings } from './pages/Settings';
 import { Login } from './pages/Login';
 import { api } from './lib/api';
 
-const isAuthenticated = () => sessionStorage.getItem('revivex_auth') === 'true';
+const isAuthenticated = () => localStorage.getItem('revivex_auth') === 'true';
 
 const ProtectedLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();

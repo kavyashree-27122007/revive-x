@@ -19,7 +19,7 @@ export const Login: React.FC = () => {
         (email === 'admin@revivex.ai' && password === 'demo1234') ||
         (email === '' && password === '')
       ) {
-        sessionStorage.setItem('revivex_auth', 'true');
+        localStorage.setItem('revivex_auth', 'true');
         navigate('/');
       } else {
         setError('Invalid credentials. Try admin@revivex.ai / demo1234');
