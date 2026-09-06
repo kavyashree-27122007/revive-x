@@ -9,6 +9,8 @@
 [![Tests](https://img.shields.io/badge/Tests-29%2F29%20Passing-brightgreen.svg)](https://vitest.dev/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+**🟢 Live Demo:** [https://revive-x-app.vercel.app/](https://revive-x-app.vercel.app/)
+
 ---
 
 ## 🎯 Executive Summary
